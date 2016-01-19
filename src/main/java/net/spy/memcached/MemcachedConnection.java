@@ -1305,7 +1305,8 @@ public class MemcachedConnection extends SpyThread {
     final CountDownLatch latch = new CountDownLatch(nodes.size());
 
     for (MemcachedNode node : nodes) {
-      getLogger().debug("broadcast Operation: node = " + node);
+      if (getLogger().isDebugEnabled())
+        getLogger().debug("broadcast Operation: node = " + node);
       Operation op = of.newOp(node, latch);
       op.initialize();
       node.addOp(op);
